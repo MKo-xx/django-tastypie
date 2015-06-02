@@ -380,7 +380,7 @@ class Serializer(object):
         try:
             return json.loads(content)
         except ValueError:
-            raise BadRequest
+            raise BadRequest("Invalid JSON")
 
     def to_jsonp(self, data, options=None):
         """
@@ -429,7 +429,7 @@ class Serializer(object):
                 forbid_entities=forbid_entities
             )
         except (LxmlError, DefusedXmlException):
-            raise BadRequest()
+            raise BadRequest("Invalid XML")
 
         return self.from_etree(parsed.getroot())
 
